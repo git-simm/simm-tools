@@ -53,8 +53,8 @@ public class GitNoticeController {
         QwNotice.QwContent content = QwNotice.QwContent.builder().content(
                 String.format("%s 正在合并代码，%s -> %s",project,source,target)
         ).mentionedList(noticeUsers).build();
-        QwNotice notice = QwNotice.builder().msgType("markdown")
-                .markdown(content).build();
+        QwNotice notice = QwNotice.builder().msgType("text")
+                .text(content).build();
         log.info(JSON.toJSONString(notice));
 //        String[] cmds = {"curl", "-X", "POST", qwAddr,
 //                "-H", "accept: */*", "-H", "Content-Type: application/json;charset=UTF-8", "-d"
