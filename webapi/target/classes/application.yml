@@ -2,4 +2,5 @@ server:
   port: 8580
 #spring:
 #  profiles:
+debug: true
 #    active: test-yml

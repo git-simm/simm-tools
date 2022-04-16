@@ -15,7 +15,7 @@ import java.util.List;
  * 跨域统一拦截
  * @author simm
  */
-@Configuration
+//@Configuration
 @Data
 public class CrosInterceptor implements WebFluxConfigurer {
     @Value("#{'${cors.allowedOrigins:*}'.split(',')}")
@@ -29,8 +29,8 @@ public class CrosInterceptor implements WebFluxConfigurer {
     /**
      * corsWebFilter需要早于AuthFiler
      */
-    @Bean
-    @Order(-200) //非常重要，一定要早于AuthFilter
+//    @Bean
+//    @Order(-200) //非常重要，一定要早于AuthFilter
     CorsWebFilter corsWebFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);

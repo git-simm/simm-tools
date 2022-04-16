@@ -2,6 +2,7 @@ package com.simm.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.reactive.config.EnableWebFlux;
@@ -11,7 +12,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
  * @author miscr
  * docs: https://www.cnblogs.com/niechen/p/9303451.html
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.simm"})
 @EnableWebFlux
 @EnableAsync
 @EnableAspectJAutoProxy(exposeProxy = true)
