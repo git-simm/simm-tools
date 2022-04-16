@@ -2,5 +2,8 @@ server:
   port: 8580
 #spring:
 #  profiles:
-debug: true
+debug: false
+spring:
+  application:
+    name: simm-tools
 #    active: test-yml
