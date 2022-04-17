@@ -1,1 +1,4 @@
 /.idea/*
+/webapi/target
+/common/target
+/service/target

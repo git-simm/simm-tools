@@ -20,9 +20,9 @@ import java.util.Map;
 @RequestMapping(value = "/git")
 @Slf4j
 public class GitNoticeController {
-    @Value("${git-notice-addr:}")
+    @Value("${notice.qw.publish.addr:}")
     private String qwAddr;
-    @Value("#{'${git-notice-users:wup06,wangc21,liulj}'.split(',')}")
+    @Value("#{'${notice.qw.publish.users:wup06,wangc21,liulj}'.split(',')}")
     private List<String> noticeUsers;
     @Autowired
     private OkHttpUtil okHttpUtil;

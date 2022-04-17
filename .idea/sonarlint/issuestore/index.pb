@@ -207,8 +207,6 @@ A
 webapi/webapi.iml,6\c\6c1bf0445da15b79ac6a8de0e09d2b8d4c0792f1
 h
 8common/src/main/java/com/simm/common/model/QwNotice.java,3\7\377eb9c7b77c9afa5e62ae82eae372f44066907a
-Y
-)webapi/src/main/resources/application.yml,4\a\4a9935a7cf420d9df61f85a9508507a766f236d1
 U
 %webapi/target/classes/application.yml,0\1\01c5e141010db18a3bab2bb072160db81d9e66b2
 @
