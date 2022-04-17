@@ -20,7 +20,7 @@ import java.util.Map;
 @RequestMapping(value = "/git")
 @Slf4j
 public class GitNoticeController {
-    @Value("${git-notice-addr:https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=643d5e0c-5579-4857-84b1-13c816a05a43}")
+    @Value("${git-notice-addr:}")
     private String qwAddr;
     @Value("#{'${git-notice-users:wup06,wangc21,liulj}'.split(',')}")
     private List<String> noticeUsers;
