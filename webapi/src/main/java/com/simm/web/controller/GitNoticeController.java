@@ -26,7 +26,7 @@ public class GitNoticeController {
     private List<String> noticeUsers;
     @Autowired
     private OkHttpUtil okHttpUtil;
-
+    private final String MAIN_BRANCH = "master";
     @GetMapping()
     public Mono<String> success() {
         return Mono.fromSupplier(() -> "hello,this is simm's tools");
@@ -45,7 +45,10 @@ public class GitNoticeController {
         Map objAttrs = (Map) merge.get("object_attributes");
         String source = objAttrs.get("source_branch").toString();
         String target = objAttrs.get("target_branch").toString();
-        if ("master".equals(source.toLowerCase())) {
+//        if ("master".equals(source.toLowerCase())) {
+//            return ok;
+//        }
+        if (!MAIN_BRANCH.equalsIgnoreCase(target)) {
             return ok;
         }
         // 发消息给测试

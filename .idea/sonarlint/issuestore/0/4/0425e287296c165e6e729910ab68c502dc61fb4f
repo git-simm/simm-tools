@@ -1,24 +1,24 @@
 
 c
-java:S2142o"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8ï«—ƒ0
-X	java:S125'"<This block of commented-out lines of code should be removed.(î’Áß8ï«—ƒ0
-I
-java:S1612U",Replace this lambda with a method reference.(¤Ø„8´Ï¬—ƒ0
-I
-java:S16025",Remove useless curly braces around statement(ûÒ’8ï«—ƒ0
-c
 java:S2142c"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8ï«—ƒ0
-F
-java:S1068 "+Remove this unused "country" private field.(“—àÊúÿÿÿÿ
 I
 java:S1068!",Remove this unused "country2" private field.(§Îƒş8ï«—ƒ0
-E	java:S108c")Either remove or fill this block of code.(ä ¹€8ï«—ƒ0
-N
-java:S16029",Remove useless curly braces around statement(ÑÒÀŒıÿÿÿÿ8ï«—ƒ0
-X	java:S1253"<This block of commented-out lines of code should be removed.(À›’¬8ï«—ƒ0
-€
-java:S1488`"^Immediately return this expression instead of assigning it to the temporary variable "result".(ö˜úÿÿÿÿ8ï«—ƒ0
-7
-java:S3751_"Make this method "public".(ûİ­8ï«—ƒ0
+c
+java:S2142o"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8ï«—ƒ0
 N
 java:S1612H",Replace this lambda with a method reference.(äî¯¸øÿÿÿÿ8ï«—ƒ0
+F
+java:S1068 "+Remove this unused "country" private field.(“—àÊúÿÿÿÿ
+X	java:S125'"<This block of commented-out lines of code should be removed.(î’Áß8ï«—ƒ0
+N
+java:S16029",Remove useless curly braces around statement(ÑÒÀŒıÿÿÿÿ8ï«—ƒ0
+E	java:S108c")Either remove or fill this block of code.(ä ¹€8ï«—ƒ0
+I
+java:S16025",Remove useless curly braces around statement(ûÒ’8ï«—ƒ0
+7
+java:S3751_"Make this method "public".(ûİ­8ï«—ƒ0
+€
+java:S1488`"^Immediately return this expression instead of assigning it to the temporary variable "result".(ö˜úÿÿÿÿ8ï«—ƒ0
+I
+java:S1612U",Replace this lambda with a method reference.(¤Ø„8´Ï¬—ƒ0
+X	java:S1253"<This block of commented-out lines of code should be removed.(À›’¬8ï«—ƒ0
