@@ -1,6 +1,5 @@
 package com.simm.common.configuration;
 
-import com.sun.istack.internal.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -28,8 +27,7 @@ public class AsyncConfig {
 
     public static class MyContextDecorator implements TaskDecorator {
         @Override
-        @NotNull
-        public Runnable decorate(@NotNull Runnable runnable) {
+        public Runnable decorate(Runnable runnable) {
             // 获取主线程中的请求信息（我们的用户信息也放在里面）
             RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
 //            Map<String, Object> authVal = BizContext.getAll();
