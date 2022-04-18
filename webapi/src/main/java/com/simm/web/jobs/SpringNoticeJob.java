@@ -21,7 +21,7 @@ public class SpringNoticeJob {
     /**
      * 测试定时任务
      */
-    @Scheduled(cron = "0/5 * * * * ?")
+//    @Scheduled(cron = "0/5 * * * * ?")
     private void configureTasks() {
         log.info("执行静态定时任务时间: " + LocalDateTime.now());
     }
