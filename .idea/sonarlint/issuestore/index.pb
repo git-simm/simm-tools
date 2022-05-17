@@ -212,8 +212,6 @@ Wcommon/target/maven-status/maven-compiler-plugin/compile/default-compile/inputF
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-Y
-)webapi/src/main/resources/application.yml,4\a\4a9935a7cf420d9df61f85a9508507a766f236d1
 s
 Ccommon/src/main/java/com/simm/common/configuration/AsyncConfig.java,1\4\144cffbc7214a1a655fe43f92f256b812a707bfb
 o

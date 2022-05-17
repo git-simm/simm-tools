@@ -30,11 +30,11 @@ public class GitNoticeController {
     private String qwAddr;
     @Value("#{'${notice.qw.publish.users:wup06,wangc21,liulj}'.split(',')}")
     private List<String> noticeUsers;
-    @Value("sys.bpm.app.version-url:https://git.mingyuanyun.com/api/v4/projects/808/repository/files/config%2Fparams.php?ref=Pre")
+    @Value("${sys.bpm.app.version-url:https://git.mingyuanyun.com/api/v4/projects/808/repository/files/config%2Fparams.php?ref=Pre}")
     private String versionUrl;
-    @Value("sys.bpm.app.token-key:PRIVATE-TOKEN")
+    @Value("${sys.bpm.app.token-key:PRIVATE-TOKEN}")
     private String tokenKey;
-    @Value("sys.bpm.app.token:wvzYgebknZt6gy91tYop")
+    @Value("${sys.bpm.app.token:wvzYgebknZt6gy91tYop}")
     private String token;
     @Autowired
     private OkHttpUtil okHttpUtil;
@@ -66,7 +66,7 @@ public class GitNoticeController {
         }
         // 发消息给测试
         QwNotice.QwContent content = QwNotice.QwContent.builder().content(
-                String.format("%s 正在合并代码，%s -> %s", project, source, target)
+                String.format("【%s】 %s 正在合并代码，%s -> %s", getVersion(), project, source, target)
         ).mentionedList(noticeUsers).build();
         QwNotice notice = QwNotice.builder().msgType("text")
                 .text(content).build();
@@ -81,15 +81,25 @@ public class GitNoticeController {
      * @return
      */
     @GetMapping("/bpm/version")
-    public String getVersion() throws UnsupportedEncodingException {
-        Map<String, String> headers = new HashMap<>();
-        headers.put(tokenKey, token);
-        String body = okHttpUtil.get(versionUrl, null, headers);
-        GitFile file = JSON.parseObject(body, GitFile.class);
-        if (file != null && !StringUtils.isEmpty(file.getContent())) {
-            String fileC = new String(Base64Utils.decodeFromString(file.getContent()), "utf-8");
-            // 获取版本号
-            return fileC;
+    public String getVersion() {
+        try {
+            Map<String, String> headers = new HashMap<>();
+            headers.put(tokenKey, token);
+            String body = okHttpUtil.get(versionUrl, null, headers);
+            GitFile file = JSON.parseObject(body, GitFile.class);
+            if (file != null && !StringUtils.isEmpty(file.getContent())) {
+                String fileC = new String(Base64Utils.decodeFromString(file.getContent()), "utf-8");
+                String[] arr = fileC.split("\\r?\\n");
+                for (String line : arr) {
+                    if (line.trim().startsWith("'version'")) {
+                        return line.split("=>")[1].trim().replace("'", "").replace(",", "");
+                    }
+                }
+                // 获取版本号
+                return fileC;
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
         return null;
     }
