@@ -1,13 +1,19 @@
 package com.simm.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.simm.bpm.entity.GitFile;
 import com.simm.common.model.QwNotice;
 import com.simm.common.utils.OkHttpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.Base64Utils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,9 +30,16 @@ public class GitNoticeController {
     private String qwAddr;
     @Value("#{'${notice.qw.publish.users:wup06,wangc21,liulj}'.split(',')}")
     private List<String> noticeUsers;
+    @Value("sys.bpm.app.version-url:https://git.mingyuanyun.com/api/v4/projects/808/repository/files/config%2Fparams.php?ref=Pre")
+    private String versionUrl;
+    @Value("sys.bpm.app.token-key:PRIVATE-TOKEN")
+    private String tokenKey;
+    @Value("sys.bpm.app.token:wvzYgebknZt6gy91tYop")
+    private String token;
     @Autowired
     private OkHttpUtil okHttpUtil;
     private final String MAIN_BRANCH = "master";
+
     @GetMapping()
     public Mono<String> success() {
         return Mono.fromSupplier(() -> "hello,this is simm's tools");
@@ -53,12 +66,31 @@ public class GitNoticeController {
         }
         // 发消息给测试
         QwNotice.QwContent content = QwNotice.QwContent.builder().content(
-                String.format("%s 正在合并代码，%s -> %s",project,source,target)
+                String.format("%s 正在合并代码，%s -> %s", project, source, target)
         ).mentionedList(noticeUsers).build();
         QwNotice notice = QwNotice.builder().msgType("text")
                 .text(content).build();
         log.info(JSON.toJSONString(notice));
-        okHttpUtil.post(qwAddr,notice);
+        okHttpUtil.post(qwAddr, notice);
         return ok;
+    }
+
+    /**
+     * 获取当前版本
+     *
+     * @return
+     */
+    @GetMapping("/bpm/version")
+    public String getVersion() throws UnsupportedEncodingException {
+        Map<String, String> headers = new HashMap<>();
+        headers.put(tokenKey, token);
+        String body = okHttpUtil.get(versionUrl, null, headers);
+        GitFile file = JSON.parseObject(body, GitFile.class);
+        if (file != null && !StringUtils.isEmpty(file.getContent())) {
+            String fileC = new String(Base64Utils.decodeFromString(file.getContent()), "utf-8");
+            // 获取版本号
+            return fileC;
+        }
+        return null;
     }
 }

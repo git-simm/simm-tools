@@ -19,14 +19,16 @@ import java.util.Map;
 public class OkHttpUtil {
     @Resource
     private OkHttpClient okHttpClient;
+
     /**
      * get
      *
      * @param url     请求的url
      * @param queries 请求的参数，在浏览器？后面的数据，没有可以传null
+     * @param headers 传入请求头
      * @return
      */
-    public String get(String url, Map<String, String> queries) {
+    public String get(String url, Map<String, String> queries, Map<String, String> headers) {
         String responseBody = "";
         StringBuffer sb = new StringBuffer(url);
         if (queries != null && queries.keySet().size() > 0) {
@@ -42,10 +44,13 @@ public class OkHttpUtil {
                 }
             }
         }
-        Request request = new Request
+        Request.Builder builder = new Request
                 .Builder()
-                .url(sb.toString())
-                .build();
+                .url(sb.toString());
+        if (headers != null) {
+            builder.headers(Headers.of(headers));
+        }
+        Request request = builder.build();
         Response response = null;
         try {
             response = okHttpClient.newCall(request).execute();
@@ -62,6 +67,7 @@ public class OkHttpUtil {
         }
         return responseBody;
     }
+
     /**
      * post
      *
@@ -93,6 +99,7 @@ public class OkHttpUtil {
         }
         return responseBody;
     }
+
     /**
      * post 上传文件
      *

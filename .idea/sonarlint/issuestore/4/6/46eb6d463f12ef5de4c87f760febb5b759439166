@@ -3,5 +3,7 @@ L
 java:S3740*"/Provide the parametrized type for this generic.(º¸×â8ŸÓ²›ƒ0
 L
 java:S3740-"/Provide the parametrized type for this generic.(û¡ß‘8¡ÒÆ›ƒ0
-…
-java:S11570"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(²²ûøÿÿÿÿ8˜ÂÕ›ƒ0
+r	java:S116"VRename this field "MAIN_BRANCH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éƒ8¹¥÷‹…0
+>
+java:S1170"!Make this final field static too.(éƒ8¹¥÷‹…0
+X	java:S1250"<This block of commented-out lines of code should be removed.(«Šêê8¹¥÷‹…0
