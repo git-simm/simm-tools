@@ -29,7 +29,6 @@ public class OkHttpUtil {
      * @return
      */
     public String get(String url, Map<String, String> queries, Map<String, String> headers) {
-        String responseBody = "";
         StringBuffer sb = new StringBuffer(url);
         if (queries != null && queries.keySet().size() > 0) {
             boolean firstFlag = true;
@@ -51,21 +50,7 @@ public class OkHttpUtil {
             builder.headers(Headers.of(headers));
         }
         Request request = builder.build();
-        Response response = null;
-        try {
-            response = okHttpClient.newCall(request).execute();
-            int status = response.code();
-            if (status == 200) {
-                return response.body().string();
-            }
-        } catch (Exception e) {
-            log.error("okhttp put error >> ex = {}", ExceptionUtils.getStackTrace(e));
-        } finally {
-            if (response != null) {
-                response.close();
-            }
-        }
-        return responseBody;
+        return execute(request);
     }
 
     /**
@@ -75,29 +60,37 @@ public class OkHttpUtil {
      * @param params post form 提交的参数
      * @return
      */
-    public String post(String url, Object params) {
-        String responseBody = "";
+    public String post(String url, Object params,Map<String, String> headers) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(params));
-        Request request = new Request
+        Request.Builder builder = new Request
                 .Builder()
                 .url(url)
-                .post(requestBody)
-                .build();
-        Response response = null;
-        try {
-            response = okHttpClient.newCall(request).execute();
-            int status = response.code();
-            if (status == 200) {
-                return response.body().string();
-            }
-        } catch (Exception e) {
-            log.error("okhttp post error >> ex = {}", ExceptionUtils.getStackTrace(e));
-        } finally {
-            if (response != null) {
-                response.close();
-            }
+                .post(requestBody);
+        if (headers != null) {
+            builder.headers(Headers.of(headers));
         }
-        return responseBody;
+        Request request = builder.build();
+        return execute(request);
+    }
+
+    /**
+     * post
+     *
+     * @param url    请求的url
+     * @param params post form 提交的参数
+     * @return
+     */
+    public String put(String url, Object params,Map<String, String> headers) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(params));
+        Request.Builder builder = new Request
+                .Builder()
+                .url(url)
+                .put(requestBody);
+        if (headers != null) {
+            builder.headers(Headers.of(headers));
+        }
+        Request request = builder.build();
+        return execute(request);
     }
 
     /**
@@ -136,6 +129,30 @@ public class OkHttpUtil {
             }
         } catch (Exception e) {
             log.error("okhttp postFile error >> ex = {}", ExceptionUtils.getStackTrace(e));
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
+        return responseBody;
+    }
+
+    /**
+     * 执行方法
+     * @param request 请求
+     * @return
+     */
+    public String execute(Request request) {
+        String responseBody = "";
+        Response response = null;
+        try {
+            response = okHttpClient.newCall(request).execute();
+            int status = response.code();
+            if (status == 200) {
+                return response.body().string();
+            }
+        } catch (Exception e) {
+            log.error("okhttp post error >> ex = {}", ExceptionUtils.getStackTrace(e));
         } finally {
             if (response != null) {
                 response.close();

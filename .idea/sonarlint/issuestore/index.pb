@@ -258,3 +258,5 @@ u
 Ecommon/src/main/java/com/simm/common/autoconfig/ThreadPoolConfig.java,6\a\6a37a24da82e5ad2cfff90aef26049ffd9aeb27d
 q
 Acommon/src/main/java/com/simm/common/autoconfig/XxlJobConfig.java,0\b\0b9121740c0615bc8939564a9dbd0c3e22a66cb3
+f
+6service/src/main/java/com/simm/bpm/entity/GitFile.java,e\9\e9cd0ae2cc824d72553afe2d60a79a8ea2bb1b70
